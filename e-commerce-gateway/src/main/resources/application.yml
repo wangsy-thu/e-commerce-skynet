@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product_route
+          uri: lb://e-commerce-product
+          predicates:
+            - Path=/api/ecommerce-product/**
+          filters:
+            - StripPrefix=1

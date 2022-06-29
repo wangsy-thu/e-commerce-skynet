@@ -1,0 +1,27 @@
+server:
+  port: 8003
+  servlet:
+    context-path: /ecommerce-product
+
+spring:
+  application:
+    name: e-commerce-product
+  cloud:
+    nacos:
+      discovery:
+        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
+        server-addr: 127.0.0.1:8848
+        namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
