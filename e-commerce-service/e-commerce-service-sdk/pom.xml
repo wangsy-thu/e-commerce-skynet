@@ -10,10 +10,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>e-commerce-service-sdk</artifactId>
+    <dependencies>
+        <!-- Mybatis Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!-- 模块名及描述信息 -->
+    <name>e-commerce-service-sdk</name>
+    <description>微服务模块 SDK</description>
 
 </project>

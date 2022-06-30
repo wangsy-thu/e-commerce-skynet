@@ -1,11 +1,27 @@
 server:
   port: 8003
   servlet:
-    context-path: /ecommerce-product
+    context-path: /
+
+logging:
+  level:
+    com.atguigu.gulimall: debug
 
 spring:
   application:
     name: e-commerce-product
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
   cloud:
     nacos:
       discovery:
@@ -15,6 +31,14 @@ spring:
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 
 # 暴露端点
 management:

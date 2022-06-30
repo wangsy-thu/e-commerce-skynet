@@ -5,6 +5,6 @@ spring:
         - id: product_route
           uri: lb://e-commerce-product
           predicates:
-            - Path=/api/ecommerce-product/**
+            - Path=/api/product/**,/hello
           filters:
-            - StripPrefix=1
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
