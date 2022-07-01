@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        # server-addr: 127.0.0.1:8848,127.0.0.1:8849,127.0.0.1:8850 # Nacos 服务器地址
+        namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+        enabled: true
+    alicloud:
+      access-key: LTAI5t8LBc2EpgMB77pUL6j9
+      secret-key: eF9VMbqpnke48jJKpXhNCJv9dPJANV
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+      sms:
+        host: https://dfsns.market.alicloudapi.com
+        path: /data/send_sms
+        template: TPL_0000
+        sign: 1
+        appcode: 843954b7bd83483980a6df2bab274e4c
+  application:
+    name: gulimall-third-party
+
+server:
+  port: 30000
+  servlet:
+    context-path: /
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

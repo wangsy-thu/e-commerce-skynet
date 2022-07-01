@@ -1,0 +1,33 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: 127.0.0.1:8848
+        namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+  application:
+    name: e-commerce-search
+  thymeleaf:
+    cache: false
+  redis:
+    host: 127.0.0.1
+  session:
+    store-type: redis
+
+server:
+  port: 12000
+  servlet:
+    context-path: /
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

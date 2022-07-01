@@ -8,3 +8,34 @@ spring:
             - Path=/api/product/**,/hello
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        - id: member_route
+          uri: lb://e-commerce-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        - id: ware_route
+          uri: lb://e-commerce-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        - id: third_party_route
+          uri: lb://e-commerce-third-party
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
+
+        - id: host_route
+          uri: lb://e-commerce-product
+          predicates:
+            - Host=gulimall.com,item.gulimall.com
+
+        - id: search_route
+          uri: lb://e-commerce-search
+          predicates:
+            - Host=search.gulimall.com

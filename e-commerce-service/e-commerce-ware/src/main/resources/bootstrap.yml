@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+        enabled: true
+  application:
+    name: e-commerce-ware
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+server:
+  port: 11000
+  servlet:
+    context-path: /
+
+logging:
+  level:
+    com.atguigu: debug
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
