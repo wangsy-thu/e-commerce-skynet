@@ -24,6 +24,9 @@
         <module>e-commerce-recommend</module>
         <module>e-commerce-service-config</module>
         <module>e-commerce-service-sdk</module>
+        <module>e-commerce-schedule</module>
+        <module>e-commerce-crawler</module>
+        <module>e-commerce-statistics</module>
     </modules>
 
     <properties>

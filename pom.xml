@@ -13,8 +13,8 @@
         <module>e-commerce-gateway</module>
         <module>e-commerce-service</module>
         <module>e-commerce-admin</module>
-        <module>e-commerce-schedule</module>
         <module>e-commerce-mvc-config</module>
+        <module>e-commerce-service/e-commerce-seckill</module>
     </modules>
 
     <properties>
