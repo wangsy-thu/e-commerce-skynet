@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient("gulimall-product")
+@FeignClient("e-commerce-product")
 public interface ProductFeignService {
 
     @GetMapping("/product/attr/info/{attrId}")

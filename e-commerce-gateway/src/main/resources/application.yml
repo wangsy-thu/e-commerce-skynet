@@ -30,6 +30,11 @@ spring:
           filters:
             - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
 
+        - id: gulimall_auth_route
+          uri: lb://e-commerce-auth-server
+          predicates:
+            - Host=auth.gulimall.com
+
         - id: host_route
           uri: lb://e-commerce-product
           predicates:
@@ -39,3 +44,8 @@ spring:
           uri: lb://e-commerce-search
           predicates:
             - Host=search.gulimall.com
+
+        - id: cart_route
+          uri: lb://e-commerce-cart
+          predicates:
+            - Host=cart.gulimall.com

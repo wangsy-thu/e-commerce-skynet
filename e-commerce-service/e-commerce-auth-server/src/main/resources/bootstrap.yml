@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+        enabled: true
+  application:
+    name: e-commerce-auth-server
+  thymeleaf:
+    cache: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  session:
+    store-type: redis
+
+server:
+  port: 20000
+  servlet:
+    context-path: /
+    session:
+      timeout: 30m

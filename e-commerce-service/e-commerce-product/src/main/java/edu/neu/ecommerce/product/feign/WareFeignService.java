@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient("gulimall-ware")
+@FeignClient("e-commerce-ware")
 public interface WareFeignService {
 
     @PostMapping("/ware/waresku/hasstock")
