@@ -17,4 +17,49 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!-- 模块名及描述信息 -->
+    <name>e-commerce-schedule</name>
+    <description>电商系统调度中心服务</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>edu.neu.ecommerce</groupId>
+            <artifactId>e-commerce-service-config</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.neu.ecommerce</groupId>
+            <artifactId>e-commerce-service-sdk</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- MySQL 驱动, 注意, 这个需要与 MySQL 版本对应 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.12</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
