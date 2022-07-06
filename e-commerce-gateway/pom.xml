@@ -35,7 +35,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
-
+        <!-- sentinel与网关的整合 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+        </dependency>
         <dependency>
             <groupId>edu.neu.ecommerce.common</groupId>
             <artifactId>e-commerce-common</artifactId>

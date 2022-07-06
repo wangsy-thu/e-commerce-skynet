@@ -62,7 +62,7 @@ public class SeckillSkuRelationController {
     @RequestMapping("/update")
     public R update(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
 		seckillSkuRelationService.updateById(seckillSkuRelation);
-
+        seckillSkuRelationService.updateSeckillSkuRedis(seckillSkuRelation);
         return R.ok();
     }
 
@@ -72,7 +72,7 @@ public class SeckillSkuRelationController {
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
 		seckillSkuRelationService.removeByIds(Arrays.asList(ids));
-
+        seckillSkuRelationService.deleteSeckillSkuRedis(Arrays.asList(ids));
         return R.ok();
     }
 

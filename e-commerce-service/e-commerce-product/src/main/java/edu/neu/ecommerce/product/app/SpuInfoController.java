@@ -1,5 +1,6 @@
 package edu.neu.ecommerce.product.app;
 
+import edu.neu.ecommerce.product.entity.SkuInfoEntity;
 import edu.neu.ecommerce.product.entity.SpuInfoEntity;
 import edu.neu.ecommerce.product.service.SpuInfoService;
 import edu.neu.ecommerce.product.vo.SpuSaveVo;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -34,6 +36,17 @@ public class SpuInfoController {
         PageUtils page = spuInfoService.queryPagByCondition(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 根据skuId查询spu的信息
+     */
+    @GetMapping(value = "/skuId/{skuId}")
+    public R getSpuInfoBySkuId(@PathVariable("skuId") Long skuId) {
+
+        SpuInfoEntity spuInfoEntity = spuInfoService.getSpuInfoBySkuId(skuId);
+
+        return R.ok().setData(spuInfoEntity);
     }
 
 

@@ -4,6 +4,7 @@ package edu.neu.ecommerce.cart.service;
 import edu.neu.ecommerce.cart.vo.Cart;
 import edu.neu.ecommerce.cart.vo.CartItem;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface CartService {
@@ -42,6 +43,8 @@ public interface CartService {
      * 删除购物项
      */
     void deleteIdCartInfo(Integer skuId);
+
+    List<CartItem> getCurrentUserCartItems();
 
 //    /**
 //     * 获取当前用户的购物车所有选中的商品项

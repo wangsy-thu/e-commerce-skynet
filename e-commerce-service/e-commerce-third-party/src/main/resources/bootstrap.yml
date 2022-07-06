@@ -20,8 +20,19 @@ spring:
         template: TPL_0000
         sign: 1
         appcode: 843954b7bd83483980a6df2bab274e4c
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
   application:
-    name: gulimall-third-party
+    name: e-commerce-third-party
 
 server:
   port: 30000

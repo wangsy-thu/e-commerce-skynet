@@ -5,6 +5,7 @@ import edu.neu.ecommerce.utils.PageUtils;
 import edu.neu.ecommerce.utils.R;
 import edu.neu.ecommerce.ware.entity.WareInfoEntity;
 import edu.neu.ecommerce.ware.service.WareInfoService;
+import edu.neu.ecommerce.ware.vo.FareVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,11 @@ public class WareInfoController {
         return R.ok().put("page", page);
     }
 
+    @GetMapping("/fare")
+    public R getFare(@RequestParam("addrId") Long addrId) {
+        FareVo fare = wareInfoService.getFare(addrId);
+        return R.ok().setData(fare);
+    }
 
     /**
      * 信息

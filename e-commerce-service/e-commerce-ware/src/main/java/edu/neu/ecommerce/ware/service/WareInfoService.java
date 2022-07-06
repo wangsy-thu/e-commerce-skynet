@@ -4,6 +4,7 @@ package edu.neu.ecommerce.ware.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.neu.ecommerce.utils.PageUtils;
 import edu.neu.ecommerce.ware.entity.WareInfoEntity;
+import edu.neu.ecommerce.ware.vo.FareVo;
 
 import java.util.Map;
 
@@ -17,5 +18,7 @@ import java.util.Map;
 public interface WareInfoService extends IService<WareInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    FareVo getFare(Long addrId);
 }
 

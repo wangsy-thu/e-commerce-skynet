@@ -27,6 +27,7 @@
         <module>e-commerce-schedule</module>
         <module>e-commerce-crawler</module>
         <module>e-commerce-statistics</module>
+        <module>e-commerce-backstage</module>
     </modules>
 
     <properties>

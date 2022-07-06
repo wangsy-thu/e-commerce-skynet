@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -17,6 +19,12 @@ public class CartController {
 
     @Autowired
     CartService cartService;
+
+    @GetMapping("/currentUserCartItems")
+    @ResponseBody
+    public List<CartItem> getCurrentUserCartItems(){
+        return cartService.getCurrentUserCartItems();
+    }
 
     /**
      * 浏览器里面的cookie，里面有个user-key：标识用户=身份，一个月后过期
@@ -26,7 +34,6 @@ public class CartController {
      * 登录：session有
      * 没登陆：按照cookie里面带来的user-key做
      * 第一次：如果没有临时用户，帮忙填创建一个临时用户
-     * @return
      */
     @GetMapping("/cart.html")
     public String cartListPage(Model model) throws ExecutionException, InterruptedException {

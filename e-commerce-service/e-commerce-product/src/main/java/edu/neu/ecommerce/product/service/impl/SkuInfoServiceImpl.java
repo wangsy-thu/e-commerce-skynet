@@ -1,13 +1,17 @@
 package edu.neu.ecommerce.product.service.impl;
 
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.neu.ecommerce.common.utils.R;
 import edu.neu.ecommerce.product.dao.SkuInfoDao;
 import edu.neu.ecommerce.product.entity.SkuImagesEntity;
 import edu.neu.ecommerce.product.entity.SkuInfoEntity;
 import edu.neu.ecommerce.product.entity.SpuInfoDescEntity;
+import edu.neu.ecommerce.product.feign.SeckillFeignService;
 import edu.neu.ecommerce.product.service.*;
+import edu.neu.ecommerce.product.vo.SeckillInfoVo;
 import edu.neu.ecommerce.product.vo.SkuItemSaleAttrVo;
 import edu.neu.ecommerce.product.vo.SkuItemVo;
 import edu.neu.ecommerce.product.vo.SpuItemAttrGroupVo;
@@ -17,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +44,9 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
     @Autowired
     SkuSaleAttrValueService skuSaleAttrValueService;
+
+    @Resource
+    SeckillFeignService seckillFeignService;
 
     @Autowired
     ThreadPoolExecutor threadPoolExecutor;
@@ -142,8 +150,23 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
             skuItemVo.setImages(images);
         }, threadPoolExecutor);
 
-        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();
+        // 查询当前商品是否有参与秒杀优惠
+        CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
+            R seckillInfo = seckillFeignService.getSkuSeckillInfo(skuId);
+            if (seckillInfo.getCode() == 0){
+                SeckillInfoVo seckillInfoVo = seckillInfo.getData(new TypeReference<SeckillInfoVo>(){});
+                skuItemVo.setSeckillInfo(seckillInfoVo);
+            }
+        }, threadPoolExecutor);
 
+        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture, seckillFuture).get();
+//        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();
+//        System.err.println("当前商品的详细信息："+skuItemVo);
         return skuItemVo;
+    }
+
+    @Override
+    public List<SkuInfoEntity> getByIds(List<Long> skuIds) {
+        return this.baseMapper.selectBatchIds(skuIds);
     }
 }

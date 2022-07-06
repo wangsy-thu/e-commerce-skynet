@@ -5,6 +5,8 @@ import edu.neu.ecommerce.ware.entity.WareSkuEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 商品库存
  * 
@@ -25,4 +27,10 @@ public interface WareSkuDao extends BaseMapper<WareSkuEntity> {
      * @return 库存量
      */
     Long getSkuStock(@Param("sku") Long sku);
+
+    List<Long> listWareIdHasSkuStock(@Param("skuId") long skuId);
+
+    long lockSkuStock(@Param("skuId") long skuId,@Param("wareId") long wareId,@Param("num") Integer num);
+
+    void unLockStock(Long skuId, Long wareId, Integer num);
 }

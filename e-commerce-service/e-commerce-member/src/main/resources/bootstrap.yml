@@ -13,8 +13,19 @@ spring:
           management:
             context-path: ${server.servlet.context-path}/actuator
         enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8333
   application:
     name: e-commerce-member
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml

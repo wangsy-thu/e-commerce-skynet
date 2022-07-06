@@ -8,6 +8,17 @@ spring:
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
   application:
     name: e-commerce-search
   thymeleaf:

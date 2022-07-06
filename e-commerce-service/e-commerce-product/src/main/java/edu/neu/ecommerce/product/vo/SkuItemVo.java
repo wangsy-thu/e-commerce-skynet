@@ -34,4 +34,7 @@ public class SkuItemVo {
 
     //5、spu规格参数信息（pms_attr）【以组为单位】
     private List<SpuItemAttrGroupVo> groupAttrs;
+
+    //6、前商品的秒杀优惠信息
+    private SeckillInfoVo seckillInfo;
 }

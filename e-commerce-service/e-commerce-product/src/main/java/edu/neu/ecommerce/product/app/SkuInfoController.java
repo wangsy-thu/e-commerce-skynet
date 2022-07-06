@@ -4,10 +4,11 @@ import edu.neu.ecommerce.product.entity.SkuInfoEntity;
 import edu.neu.ecommerce.product.service.SkuInfoService;
 import edu.neu.ecommerce.utils.PageUtils;
 import edu.neu.ecommerce.utils.R;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,8 +23,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("product/skuinfo")
 public class SkuInfoController {
-    @Autowired
-    private SkuInfoService skuInfoService;
+    private final SkuInfoService skuInfoService;
+
+    public SkuInfoController(SkuInfoService skuInfoService) {
+        this.skuInfoService = skuInfoService;
+    }
 
     /**
      * 列表
@@ -33,6 +37,21 @@ public class SkuInfoController {
         PageUtils page = skuInfoService.queryPageByCondition(params);
 
         return R.ok().put("page", page);
+    }
+
+    @RequestMapping("/{skuId}/price")
+    public R getPrice(@PathVariable("skuId") long skuId){
+        BigDecimal price = skuInfoService.getById(skuId).getPrice();
+        return R.ok().setData(price.toString());
+    }
+
+    /**
+     * 查询商品集合
+     */
+    @PostMapping("/infos")
+    public R infos(@RequestBody List<Long> skuIds) {
+        List<SkuInfoEntity> skuInfos = skuInfoService.getByIds(skuIds);
+        return R.ok().setData(skuInfos);
     }
 
 

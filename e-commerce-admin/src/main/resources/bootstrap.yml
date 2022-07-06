@@ -21,6 +21,17 @@ spring:
             context-path: ${server.servlet.context-path}/actuator
           user.name: WangSongyao
           user.password: 88888888
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
 
   thymeleaf:
     check-template: false
