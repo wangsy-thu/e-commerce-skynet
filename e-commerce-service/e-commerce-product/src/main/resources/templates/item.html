@@ -523,6 +523,17 @@
                             <span>￥</span>
                             <span th:text="${#numbers.formatDecimal(item.info.price,3,2)}">4499.00</span>
                         </li>
+                        <li style="color: red" th:if="${item.seckillInfo != null}">
+
+                            <span th:if="${#dates.createNow().getTime() < item.seckillInfo.startTime}">
+                                商品将会在[[${#dates.format(new java.util.Date(item.seckillInfo.startTime),"yyyy-MM-dd HH:mm:ss")}]]进行秒杀
+                            </span>
+
+                            <span th:if="${#dates.createNow().getTime() >= item.seckillInfo.startTime && #dates.createNow().getTime() <= item.seckillInfo.endTime}">
+                                商品正在秒杀！！秒杀价  [[${#numbers.formatDecimal(item.seckillInfo.seckillPrice,1,2)}]]
+                            </span>
+
+                        </li>
                         <li>
                             <a href="/static/item/">
                                 预约说明
@@ -615,9 +626,9 @@
                             <dt>选择[[${attr.attrName}]]</dt>
                             <dd th:each="vals : ${attr.attrValues}" th:attr="skus=${vals.skuIds}">
                                 <a
-                                        th:attr="skus = ${vals.skuIds},
+                                   th:attr="skus = ${vals.skuIds},
                                    class = ${#lists.contains(#strings.listSplit(vals.skuIds, ','), item.info.skuId.toString()) ? 'sku_attr_value checked' :'sku_attr_value'}"
-                                >
+                                   >
                                     [[${vals.attrValue}]]
                                 </a>
                             </dd>
@@ -644,11 +655,19 @@
                         </div>
                     </div>
 
-                    <div class="box-btns-two">
-                        <!--                        <a href="http://cart.gulimall.com/addToCart">-->
-                        <!--                        <a href="#" id="addToCartA">-->
+                    <div class="box-btns-two" th:if="${item.seckillInfo == null || (#dates.createNow().getTime() < item.seckillInfo.startTime || #dates.createNow().getTime() > item.seckillInfo.endTime)}">
+<!--                        <a href="http://cart.gulimall.com/addToCart">-->
+<!--                        <a href="#" id="addToCartA">-->
                         <a class="addToCart" href="#" th:attr="skuId=${item.info.skuId}">
                             加入购物车
+                        </a>
+                    </div>
+
+                    <div class="box-btns-two"
+                         th:if="${item.seckillInfo != null && (#dates.createNow().getTime() >= item.seckillInfo.startTime && #dates.createNow().getTime() <= item.seckillInfo.endTime)}">
+                        <a class="seckill" href="#"
+                           th:attr="skuId=${item.info.skuId},sessionId=${item.seckillInfo.promotionSessionId},code=${item.seckillInfo.randomCode}">
+                            立即抢购
                         </a>
                     </div>
 
