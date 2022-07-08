@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import edu.neu.ecommerce.member.entity.MemberReceiveAddressEntity;
 import edu.neu.ecommerce.utils.PageUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +18,7 @@ import java.util.Map;
 public interface MemberReceiveAddressService extends IService<MemberReceiveAddressEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<MemberReceiveAddressEntity> getAddress(Long memberId);
 }
 
