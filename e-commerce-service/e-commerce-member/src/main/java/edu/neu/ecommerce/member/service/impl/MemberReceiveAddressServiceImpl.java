@@ -21,7 +21,7 @@ public class MemberReceiveAddressServiceImpl extends ServiceImpl<MemberReceiveAd
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<MemberReceiveAddressEntity> page = this.page(
                 new Query<MemberReceiveAddressEntity>().getPage(params),
-                new QueryWrapper<MemberReceiveAddressEntity>()
+                new QueryWrapper<>()
         );
 
         return new PageUtils(page);
@@ -29,8 +29,8 @@ public class MemberReceiveAddressServiceImpl extends ServiceImpl<MemberReceiveAd
 
     @Override
     public List<MemberReceiveAddressEntity> getAddress(Long memberId) {
-        List<MemberReceiveAddressEntity> addressEntities = this.list(new QueryWrapper<MemberReceiveAddressEntity>().eq("member_id", memberId));
-        return addressEntities;
+        return this.list(new QueryWrapper<MemberReceiveAddressEntity>()
+                .eq("member_id", memberId));
     }
 
 }
