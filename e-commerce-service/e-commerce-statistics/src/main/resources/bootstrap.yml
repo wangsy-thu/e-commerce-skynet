@@ -1,35 +1,23 @@
-server:
-  port: 8003
-  servlet:
-    context-path: /
-
 spring:
-  application:
-    name: e-commerce-product
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-  thymeleaf:
-    cache: false
-  redis:
-    host: 127.0.0.1
-    port: 6379
+    url: jdbc:mysql://localhost:3306/ecommerce_statistics?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
   cloud:
     nacos:
       discovery:
-        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
         server-addr: 127.0.0.1:8848
         namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator
+        enabled: true
     sentinel:
       transport:
         dashboard: localhost:8333
+  application:
+    name: e-commerce-statistics
   zipkin:
     base-url: http://127.0.0.1:9411
     discovery-client-enabled: false
@@ -38,16 +26,6 @@ spring:
   sleuth:
     sampler:
       probability: 1
-  rabbitmq:
-    virtual-host: /
-    host: 127.0.0.1
-    port: 5672
-    publisher-returns: true
-    template:
-      mandatory: true
-    listener:
-      simple:
-        acknowledge-mode: manual
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
@@ -56,6 +34,11 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+server:
+  port: 28001
+  servlet:
+    context-path: /
 
 # 暴露端点
 management:
