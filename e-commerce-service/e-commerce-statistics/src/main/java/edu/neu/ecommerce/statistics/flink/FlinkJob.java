@@ -96,7 +96,7 @@ public class FlinkJob implements CommandLineRunner {
         /* 聚集操作 输出统计类 */
         SingleOutputStreamOperator<SkuClickCountVo> skuClickCountStream = skuClickVoDataStream
                 .keyBy(SkuClickVo::getSkuId)
-                .window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+                .window(SlidingEventTimeWindows.of(Time.seconds(60), Time.seconds(30)))
                 .aggregate(new SkuCountAgg(), new SkuClickCountResult());
 
         /* 排序处理，输出结果 */
@@ -198,19 +198,28 @@ public class FlinkJob implements CommandLineRunner {
             skuClickCountArrayList.sort((o1, o2) -> o2.getCount().intValue() - o1.getCount().intValue());
 
             /* 取前 N 名输出结果 */
-            StringBuilder result = new StringBuilder();
-            result.append("========================================\n");
-            result.append("窗口结束时间：").append(new Timestamp(timestamp - 1)).append("\n");
-            for (int i = 0; i < this.n; i++) {
-                SkuClickCountVo skuClickCountVo = skuClickCountArrayList.get(i);
-                String info = "No." + (i + 1) + " "
-                        + "skuId：" + skuClickCountVo.getSkuId() + " "
-                        + "点击量：" + skuClickCountVo.getCount() + "\n";
-                result.append(info);
-                rmqResult.add(skuClickCountVo);
+            if(skuClickCountArrayList.size() < this.n){
+                /* 防止窗口内没有数据 */
+                int diffNum = n - skuClickCountArrayList.size();
+                for (int i = 0; i < diffNum; i++) {
+                    skuClickCountArrayList.add(new SkuClickCountVo(((long) i), 0L, timestamp, timestamp));
+                    rmqResult.addAll(skuClickCountArrayList);
+                }
+            }else{
+                StringBuilder result = new StringBuilder();
+                result.append("========================================\n");
+                result.append("窗口结束时间：").append(new Timestamp(timestamp - 1)).append("\n");
+                for (int i = 0; i < this.n; i++) {
+                    SkuClickCountVo skuClickCountVo = skuClickCountArrayList.get(i);
+                    String info = "No." + (i + 1) + " "
+                            + "skuId：" + skuClickCountVo.getSkuId() + " "
+                            + "点击量：" + skuClickCountVo.getCount() + "\n";
+                    result.append(info);
+                    rmqResult.add(skuClickCountVo);
+                }
+                result.append("========================================\n");
+                System.out.println(result);
             }
-            result.append("========================================\n");
-            System.out.println(result);
             /* 收集流数据 */
             out.collect(rmqResult);
         }

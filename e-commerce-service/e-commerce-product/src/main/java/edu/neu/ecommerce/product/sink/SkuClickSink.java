@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * <h1>用户点击商品输出</h1>
@@ -27,7 +28,8 @@ public class SkuClickSink {
     }
 
     public void sinkSkuClick(Long skuId){
-        SkuClickVo skuClickVo = new SkuClickVo(0L, skuId, 1L, LocalDateTime.now().toString());
+        String timeStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        SkuClickVo skuClickVo = new SkuClickVo(0L, skuId, 1L, timeStr);
         rabbitTemplate.convertAndSend("tutu", skuClickVo);
     }
 }
