@@ -9,6 +9,8 @@ import edu.neu.ecommerce.vo.SkuClickVo;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
 public class ProducerTest {
@@ -24,20 +26,19 @@ public class ProducerTest {
         factory.setPort(5672);
 
         Connection connection = factory.newConnection();
-        String str = JSON.toJSONString(new SkuClickVo(0L, 1L, 1L, LocalDateTime.now()));
+        Random random = new Random();
+
 
         Channel channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         while (true) {
+            String str = JSON.toJSONString(new SkuClickVo(0L, (long) random.nextInt(8), 1L, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
             channel.basicPublish("", QUEUE_NAME, null, str.getBytes(StandardCharsets.UTF_8));
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-        //关闭通道和链接
-        //channel.close();
-        //connection.close();
     }
 }
