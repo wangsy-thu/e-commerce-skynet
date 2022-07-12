@@ -1,0 +1,36 @@
+PUT /e_commerce_crawler_result
+{
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "long"
+      },
+      "platformName":{
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "skuName": {
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "skuPrice":{
+        "type": "keyword"
+      },
+      "crawTime":{
+        "type": "date"
+      },
+      "shopName": {
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "skuImgUrl":{
+        "type": "keyword",
+        "index": false,
+        "doc_values": false
+      },
+      "commentNum":{
+        "type": "keyword"
+      }
+    }
+  }
+}

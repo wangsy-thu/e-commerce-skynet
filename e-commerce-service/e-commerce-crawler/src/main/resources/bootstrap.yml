@@ -1,0 +1,38 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 7f011be7-7469-4c4a-be2d-125c14765f49
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+        enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  application:
+    name: e-commerce-crawler
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+
+server:
+  port: 25009
+  servlet:
+    context-path: /
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

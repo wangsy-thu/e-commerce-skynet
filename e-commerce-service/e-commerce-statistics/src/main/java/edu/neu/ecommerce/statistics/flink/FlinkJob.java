@@ -96,7 +96,7 @@ public class FlinkJob implements CommandLineRunner {
         /* 聚集操作 输出统计类 */
         SingleOutputStreamOperator<SkuClickCountVo> skuClickCountStream = skuClickVoDataStream
                 .keyBy(SkuClickVo::getSkuId)
-                .window(SlidingEventTimeWindows.of(Time.seconds(60), Time.seconds(30)))
+                .window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
                 .aggregate(new SkuCountAgg(), new SkuClickCountResult());
 
         /* 排序处理，输出结果 */

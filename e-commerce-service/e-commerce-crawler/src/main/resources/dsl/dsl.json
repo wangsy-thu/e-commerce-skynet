@@ -1,0 +1,47 @@
+{
+  "from": 0,
+  "size": 5,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "skuName": {
+              "query": "华为手机",
+              "operator": "OR",
+              "prefix_length": 0,
+              "max_expansions": 50,
+              "fuzzy_transpositions": true,
+              "lenient": false,
+              "zero_terms_query": "NONE",
+              "auto_generate_synonyms_phrase_query": true,
+              "boost": 1
+            }
+          }
+        }
+      ],
+      "filter": [
+        {
+          "range": {
+            "skuPrice": {
+              "from": "0",
+              "to": "9999",
+              "include_lower": true,
+              "include_upper": true,
+              "boost": 1
+            }
+          }
+        }
+      ],
+      "adjust_pure_negative": true,
+      "boost": 1
+    }
+  },
+  "sort": [
+    {
+      "skuPrice": {
+        "order": "asc"
+      }
+    }
+  ]
+}
