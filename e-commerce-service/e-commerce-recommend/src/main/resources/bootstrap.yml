@@ -1,9 +1,4 @@
 spring:
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
@@ -16,8 +11,6 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8333
-  application:
-    name: e-commerce-order
   zipkin:
     base-url: http://127.0.0.1:9411
     discovery-client-enabled: false
@@ -26,33 +19,23 @@ spring:
   sleuth:
     sampler:
       probability: 1
-  session:
-    store-type: redis
+  application:
+    name: e-commerce-recommend
   rabbitmq:
     virtual-host: /
     host: 127.0.0.1
     port: 5672
-
-  mvc:
-    format:
-      date: yyyy-MM-dd HH:mm:ss
-
-mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
 
 server:
-  port: 9000
+  port: 9126
   servlet:
     context-path: /
-
-gulimall:
-  thread:
-    core-size: 20
-    keep-alive-time: 200
-    max-size: 200
 
 # 暴露端点
 management:

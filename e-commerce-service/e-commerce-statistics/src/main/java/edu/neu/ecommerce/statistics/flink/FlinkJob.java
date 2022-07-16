@@ -101,7 +101,7 @@ public class FlinkJob implements CommandLineRunner {
 
         /* 排序处理，输出结果 */
         SingleOutputStreamOperator<List<SkuClickCountVo>> result = skuClickCountStream.keyBy(SkuClickCountVo::getWindowEnd)
-                .process(new TopN(2));
+                .process(new TopN(5));
 
         /* 转换成String */
         SingleOutputStreamOperator<String> rmqStringOutputStream = result.map(JSON::toJSONString);

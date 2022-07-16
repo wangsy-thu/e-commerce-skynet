@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * <h1>点击事件统计值对象定义</h1>
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SkuClickCountVo {
+public class SkuClickCountVo implements Serializable {
 
     /* SkuId */
     private Long skuId;

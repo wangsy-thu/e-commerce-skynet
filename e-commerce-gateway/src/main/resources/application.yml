@@ -9,6 +9,13 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
+        - id: statistics_route
+          uri: lb://e-commerce-statistics
+          predicates:
+            - Path=/api/statistics/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
         - id: member_route
           uri: lb://e-commerce-member
           predicates:
