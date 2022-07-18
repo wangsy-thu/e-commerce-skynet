@@ -23,7 +23,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/schedule")
+@RequestMapping("/schedule/task")
 public class ScheduleJobController {
 
 	private final ScheduleJobService scheduleJobService;

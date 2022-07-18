@@ -16,6 +16,20 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
+        - id: crawler_route
+          uri: lb://e-commerce-crawler
+          predicates:
+            - Path=/api/craw/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        - id: schedule_route
+          uri: lb://e-commerce-schedule
+          predicates:
+            - Path=/api/schedule/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
         - id: member_route
           uri: lb://e-commerce-member
           predicates:

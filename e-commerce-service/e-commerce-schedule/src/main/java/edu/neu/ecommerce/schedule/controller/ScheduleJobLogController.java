@@ -26,7 +26,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/scheduleLog")
+@RequestMapping("/schedule/taskLog")
 public class ScheduleJobLogController {
 	private final ScheduleJobLogService scheduleJobLogService;
 
