@@ -740,93 +740,61 @@
 
     <div class="ShopXiangqing">
         <div class="allLeft">
-            <!--火热预约-->
+            <!--还想要买-->
             <div class="huoreyuyue">
-                <h3>火热预约</h3>
+                <h3>还想要买</h3>
             </div>
             <div class="dangeshopxingqing">
-                <ul class="shopdange">
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/5a0afeddNb34732af.jpg"/></a>
-                        <p>
-                            <a href="/static/item/##">OPPO R11s Plus 双卡双待全面屏拍照手机香槟色 全网通(6G RAM+64G ROM)标配</a>
-                        </p>
-                        <p><strong class="J-p-20015341974">￥3699.00</strong></p>
-                    </li>
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/5a12873eN41754123.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="詹姆士（GEMRY） R19plus全网通4G 智能手机 双卡双待 6+128GB 鳄鱼纹雅致版（新品预约）"
-                               href="/static/item/item.jd.com/20348283521.html">詹姆士（GEMRY） R19plus全网通4G 智能手机 双卡双待
-                                6+128GB 鳄鱼纹雅致版（新品预约）</a>
-                        </p>
-                        <p><strong class="J-p-20348283521">￥13999.00</strong></p>
-                    </li>
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/59ec0131Nf239df75.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="斐纳（TOMEFON） 德国家用无线无绳手持立式充电吸尘器 静音大吸力吸尘器TF-X60"
-                               href="/static/item/item.jd.com/16683419775.html">斐纳（TOMEFON） 德国家用无线无绳手持立式充电吸尘器
-                                静音大吸力吸尘器TF-X60</a>
-                        </p>
-                        <p><strong class="J-p-16683419775">￥1599.00</strong></p>
-                    </li>
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/59015444N27317512.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="斐纳（TOMEFON） 扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金"
-                               href="/static/item/item.jd.com/12187770381.html">斐纳（TOMEFON）
-                                扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金</a>
-                        </p>
-                        <p><strong class="J-p-12187770381">￥2599.00</strong></p>
-                    </li>
-                </ul>
-            </div>
-            <!--看了又看-->
-            <div class="huoreyuyue">
-                <h3>看了又看</h3>
-            </div>
-            <div class="dangeshopxingqing">
-                <ul class="shopdange">
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/59e55e01N369f98f2.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="华为（HUAWEI） 华为 Mate10 4G手机  双卡双待 亮黑色 全网通(6GB RAM+128GB ROM)"
-                               href="/static/item/item.jd.com/17931625443.html">华为（HUAWEI） 华为 Mate10 4G手机 双卡双待 亮黑色
-                                全网通(6GB RAM+128GB ROM)</a>
-                        <p><strong class="J-p-17931625443">￥4766.00</strong></p>
-                    </li>
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/584fcc3eNdb0ab94c.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="华为 Mate 9 Pro 6GB+128GB版 琥珀金 移动联通电信4G手机 双卡双待"
-                               href="/static/item/item.jd.com/3749093.html">华为 Mate 9 Pro 6GB+128GB版 琥珀金 移动联通电信4G手机
-                                双卡双待</a>
-                        </p>
-                        <p><strong class="J-p-3749093">￥4899.00</strong></p>
-                    </li>
-                    <li>
-                        <!--shopjieshao-->
-                        <a href="/static/item/##"><img src="/static/item/img/59eb0df9Nd66d7585.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="华为（HUAWEI） 华为 Mate10 手机 亮黑色 全网通(4+64G)标准版"
-                               href="/static/item/item.jd.com/12306211773.html">华为（HUAWEI） 华为 Mate10 手机 亮黑色
-                                全网通(4+64G)标准版</a>
-                        </p>
-                        <p><strong class="J-p-12306211773">￥4088.00</strong></p>
-                    </li>
-                    <li>
-                        <a href="/static/item/##"><img src="/static/item/img/5a002ba3N126c2f73.jpg"/></a>
-                        <p>
-                            <a target="_blank" title="斐纳（TOMEFON） 扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金"
-                               href="/static/item/item.jd.com/12187770381.html">斐纳（TOMEFON）
-                                扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金</a>
-                        </p>
-                        <p><strong class="J-p-12187770381">￥2599.00</strong></p>
-                    </li>
+                <ul class="shopdange" id="AlsoBuyContent" th:attr="skuId=${item.info.skuId}">
+
                 </ul>
                 <img src="/static/item/img/5a084a1aNa1aa0a71.jpg"/>
             </div>
+<!--            &lt;!&ndash;看了又看&ndash;&gt;-->
+<!--            <div class="huoreyuyue">-->
+<!--                <h3>看了又看</h3>-->
+<!--            </div>-->
+<!--            <div class="dangeshopxingqing">-->
+<!--                <ul class="shopdange">-->
+<!--                    <li>-->
+<!--                        <a href="/static/item/##"><img src="/static/item/img/59e55e01N369f98f2.jpg"/></a>-->
+<!--                        <p>-->
+<!--                            <a target="_blank" title="华为（HUAWEI） 华为 Mate10 4G手机  双卡双待 亮黑色 全网通(6GB RAM+128GB ROM)"-->
+<!--                               href="/static/item/item.jd.com/17931625443.html">华为（HUAWEI） 华为 Mate10 4G手机 双卡双待 亮黑色-->
+<!--                                全网通(6GB RAM+128GB ROM)</a>-->
+<!--                        <p><strong class="J-p-17931625443">￥4766.00</strong></p>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="/static/item/##"><img src="/static/item/img/584fcc3eNdb0ab94c.jpg"/></a>-->
+<!--                        <p>-->
+<!--                            <a target="_blank" title="华为 Mate 9 Pro 6GB+128GB版 琥珀金 移动联通电信4G手机 双卡双待"-->
+<!--                               href="/static/item/item.jd.com/3749093.html">华为 Mate 9 Pro 6GB+128GB版 琥珀金 移动联通电信4G手机-->
+<!--                                双卡双待</a>-->
+<!--                        </p>-->
+<!--                        <p><strong class="J-p-3749093">￥4899.00</strong></p>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        &lt;!&ndash;shopjieshao&ndash;&gt;-->
+<!--                        <a href="/static/item/##"><img src="/static/item/img/59eb0df9Nd66d7585.jpg"/></a>-->
+<!--                        <p>-->
+<!--                            <a target="_blank" title="华为（HUAWEI） 华为 Mate10 手机 亮黑色 全网通(4+64G)标准版"-->
+<!--                               href="/static/item/item.jd.com/12306211773.html">华为（HUAWEI） 华为 Mate10 手机 亮黑色-->
+<!--                                全网通(4+64G)标准版</a>-->
+<!--                        </p>-->
+<!--                        <p><strong class="J-p-12306211773">￥4088.00</strong></p>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="/static/item/##"><img src="/static/item/img/5a002ba3N126c2f73.jpg"/></a>-->
+<!--                        <p>-->
+<!--                            <a target="_blank" title="斐纳（TOMEFON） 扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金"-->
+<!--                               href="/static/item/item.jd.com/12187770381.html">斐纳（TOMEFON）-->
+<!--                                扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金</a>-->
+<!--                        </p>-->
+<!--                        <p><strong class="J-p-12187770381">￥2599.00</strong></p>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <img src="/static/item/img/5a084a1aNa1aa0a71.jpg"/>-->
+<!--            </div>-->
         </div>
         <!--商品介绍-->
         <div class="allquanbushop">
@@ -1259,6 +1227,82 @@
     <img src="/static/item/img/44.png"/>
     <span>购物车还没有商品，赶紧选购吧！</span>
 </div>
+
+<!-- 第二层 -->
+<!--<div class="section_second_header">-->
+<!--    <p class="section_second_header_img"></p>-->
+<!--    <div class="section_second_header_left">-->
+<!--        &lt;!&ndash;        <p></p>&ndash;&gt;-->
+<!--        <span></span>-->
+<!--        <span class="">猜你喜欢</span>-->
+<!--        <span>总有你想要的</span>-->
+<!--        <span>-->
+<!--        </span>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="section_second_list">-->
+<!--    <div class="swiper-container swiper_section_second_list_left">-->
+<!--        <div class="swiper-wrapper">-->
+<!--            <div class="swiper-slide">-->
+<!--                <ul id="AlsoBuyContent" th:attr="skuId=${item.info.skuId}">-->
+<!--                    &lt;!&ndash;<li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<img src="/static/index/img/section_second_list_img1.jpg" alt="">&ndash;&gt;-->
+<!--                    &lt;!&ndash;<p>花王 (Merries) 妙而舒 纸尿裤 大号 L54片 尿不湿（9-14千克） （日本官方直采） 花王 (Merries) 妙而舒 纸尿裤 大号 L54片 尿不湿（9-14千</p>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<span>¥83.9</span><s>¥99.9</s>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</li>&ndash;&gt;-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="swiper-slide">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <img src="/static/index/img/section_second_list_img6.jpg" alt="">-->
+<!--                        <p>Apple iMac 21.5英寸一体机（2017新款四核Core i5 处理器/8GB内存/1TB/RP555显卡/4K屏 MNDY2CH/A） Apple iMac 21.5英寸一体机（2017新款四核Core i5 处理</p>-->
+<!--                        <span>¥9588.00</span><s>¥10288.00</s>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <img src="/static/index/img/section_second_list_img7.jpg" alt="">-->
+<!--                        <p>中柏（Jumper）EZpad 4S Pro 10.6英寸二合一平板电脑（X5 z</p>-->
+<!--                        <span>¥848.00</span><s>¥899.00</s>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <img src="/static/index/img/section_second_list_img8.jpg" alt="">-->
+<!--                        <p>飞利浦（PHILIPS）电动牙刷HX6761/03亮白型成人充电式声波震动牙刷粉色 飞利浦（PHILIPS）电动牙刷HX6761/03亮白型成人充电式声波-->
+<!--                        </p>-->
+<!--                        <span>¥379.00</span><s>¥698.00</s>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <img src="/static/index/img/section_second_list_img9.jpg" alt="">-->
+<!--                        <p>美的(Midea) 258升 变频智能三门冰箱 一级能效 风冷无霜 中门</p>-->
+<!--                        <span>¥3088.00</span><s>¥3299.00</s>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <img src="/static/index/img/section_second_list_img10.jpg" alt="">-->
+<!--                        <p>【第二件减50元】蒙羊 内蒙古羔羊羊肋排 2.4斤</p>-->
+<!--                        <span>¥99.90</span><s>¥199.00</s>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="swiper-button-prev second_list">-->
+<!--            <p></p>-->
+<!--        </div>-->
+<!--        <div class="swiper-button-next second_list">-->
+<!--            <p></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <ul class="section_second_list_right">-->
+<!--        <li>-->
+<!--            <img src="/static/index/img/section_second_list_right_img.png" alt="">-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <img src="/static/index/img/section_second_list_right_img.jpg" alt="">-->
+<!--        </li>-->
+<!--        <div class="section_second_list_right_button">-->
+<!--            <p class="section_second_list_right_button_active"></p>-->
+<!--            <p></p>-->
+<!--        </div>-->
+<!--    </ul>-->
+<!--</div>-->
 </body>
 
 <script src="/static/item/js/jquery1.9.js" type="text/javascript" charset="utf-8"></script>
@@ -1266,7 +1310,7 @@
 <script type="text/javascript">
 </script>
 
-<script>
+<script th:inline="javascript">
     $(".sku_attr_value").click(function () {
         // 1、点击的元素添加上自定义的属性
         let skus = new Array();
@@ -1320,6 +1364,26 @@
         }
         return false;
     });
+
+    let skuId = [[${item.info.skuId}]];
+
+    // 猜你喜欢
+    $.get("http://recommend.gulimall.com/graph-recommend/also-buy?skuId="+skuId, function (res) {
+        if (res.data.length > 0) {
+            res.data.forEach(function (item) {
+                // $("<li onclick='toDetail(" + item.skuId + ")'></li>").append($("<img style='width: 130px; height: 130px' src='https://gulimall-wan.oss-cn-shanghai.aliyuncs.com/2022-01-04/a4d46269-7fcb-4fdf-87a9-d97635a6e499_white1.jpg' />"))
+                $("<li onclick='toDetail(" + item.skuId + ")'></li>").append($("<img style='width: 130px; height: 130px' src='" + item.skuDefaultImg + "' />"))
+                    .append($("<p>"+item.skuTitle+"</p>"))
+                    .append($("<span>¥" + item.price + "</span>"))
+                    .appendTo("#AlsoBuyContent");
+            })
+        }
+    })
+
+    function toDetail(skuId) {
+        location.href = "http://item.gulimall.com/" + skuId + ".html";
+    }
+
 
 </script>
 

@@ -41,7 +41,7 @@
   </ul>
   <header>
     <div class="head">
-      <a href="/static/#"><img src="/static/index/img/img_01.png" /></a>
+      <a href="/static/#"><img src="/static/index/img/title.png" /></a>
       <p>X</p>
     </div>
     <!--头部-->
@@ -578,6 +578,82 @@
     </div>
 
 
+    <!-- 第二层 -->
+    <div class="section_second_header">
+      <p class="section_second_header_img"></p>
+      <div class="section_second_header_left">
+        <!--        <p></p>-->
+        <span></span>
+        <span class="">猜你喜欢</span>
+        <span>总有你想要的</span>
+        <span>
+        </span>
+      </div>
+    </div>
+    <div class="section_second_list">
+      <div class="swiper-container swiper_section_second_list_left">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <ul id="GuessLikeContent">
+              <!--<li>-->
+              <!--<img src="/static/index/img/section_second_list_img1.jpg" alt="">-->
+              <!--<p>花王 (Merries) 妙而舒 纸尿裤 大号 L54片 尿不湿（9-14千克） （日本官方直采） 花王 (Merries) 妙而舒 纸尿裤 大号 L54片 尿不湿（9-14千</p>-->
+              <!--<span>¥83.9</span><s>¥99.9</s>-->
+              <!--</li>-->
+            </ul>
+          </div>
+          <div class="swiper-slide">
+            <ul>
+              <li>
+                <img src="/static/index/img/section_second_list_img6.jpg" alt="">
+                <p>Apple iMac 21.5英寸一体机（2017新款四核Core i5 处理器/8GB内存/1TB/RP555显卡/4K屏 MNDY2CH/A） Apple iMac 21.5英寸一体机（2017新款四核Core i5 处理</p>
+                <span>¥9588.00</span><s>¥10288.00</s>
+              </li>
+              <li>
+                <img src="/static/index/img/section_second_list_img7.jpg" alt="">
+                <p>中柏（Jumper）EZpad 4S Pro 10.6英寸二合一平板电脑（X5 z</p>
+                <span>¥848.00</span><s>¥899.00</s>
+              </li>
+              <li>
+                <img src="/static/index/img/section_second_list_img8.jpg" alt="">
+                <p>飞利浦（PHILIPS）电动牙刷HX6761/03亮白型成人充电式声波震动牙刷粉色 飞利浦（PHILIPS）电动牙刷HX6761/03亮白型成人充电式声波
+                </p>
+                <span>¥379.00</span><s>¥698.00</s>
+              </li>
+              <li>
+                <img src="/static/index/img/section_second_list_img9.jpg" alt="">
+                <p>美的(Midea) 258升 变频智能三门冰箱 一级能效 风冷无霜 中门</p>
+                <span>¥3088.00</span><s>¥3299.00</s>
+              </li>
+              <li>
+                <img src="/static/index/img/section_second_list_img10.jpg" alt="">
+                <p>【第二件减50元】蒙羊 内蒙古羔羊羊肋排 2.4斤</p>
+                <span>¥99.90</span><s>¥199.00</s>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="swiper-button-prev second_list">
+          <p></p>
+        </div>
+        <div class="swiper-button-next second_list">
+          <p></p>
+        </div>
+      </div>
+      <ul class="section_second_list_right">
+        <li>
+          <img src="/static/index/img/section_second_list_right_img.png" alt="">
+        </li>
+        <li>
+          <img src="/static/index/img/section_second_list_right_img.jpg" alt="">
+        </li>
+        <div class="section_second_list_right_button">
+          <p class="section_second_list_right_button_active"></p>
+          <p></p>
+        </div>
+      </ul>
+    </div>
+
   </div>
 
 
@@ -594,12 +670,27 @@
           res.data.forEach(function (item) {
               $("<li onclick='toDetail(" + item.skuId + ")'></li>").append($("<img style='width: 130px; height: 130px' src='" + item.skuInfo.skuDefaultImg + "' />"))
                   .append($("<p>"+item.skuInfo.skuTitle+"</p>"))
-                  .append($("<span>" + item.seckillPrice + "</span>"))
-                  .append($("<s>" + item.skuInfo.price + "</s>"))
+                  .append($("<span>¥" + item.seckillPrice + "</span>"))
+                  .append($("<s>¥" + item.skuInfo.price + "</s>"))
                   .appendTo("#seckillSkuContent");
           })
       }
   })
+
+  // 猜你喜欢
+  $.get("http://recommend.gulimall.com/tensor-recommend/guess-like", function (res) {
+    if (res.data.length > 0) {
+      res.data.forEach(function (item) {
+        // $("<li onclick='toDetail(" + item.skuId + ")'></li>").append($("<img style='width: 130px; height: 130px' src='https://gulimall-wan.oss-cn-shanghai.aliyuncs.com/2022-01-04/a4d46269-7fcb-4fdf-87a9-d97635a6e499_white1.jpg' />"))
+        $("<li onclick='toDetail(" + item.skuId + ")'></li>").append($("<img style='width: 130px; height: 130px' src='" + item.skuDefaultImg + "' />"))
+                .append($("<p>"+item.skuTitle+"</p>"))
+                .append($("<span>¥" + item.price + "</span>"))
+                .appendTo("#GuessLikeContent");
+      })
+    }
+  })
+
+
 
   function toDetail(skuId) {
       location.href = "http://item.gulimall.com/" + skuId + ".html";

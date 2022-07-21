@@ -1,7 +1,5 @@
-package edu.neu.ecommerce.statistics.flink;
+package edu.neu.ecommerce.statistics.flink.sink;
 
-import cn.hutool.core.lang.UUID;
-import com.alibaba.fastjson.JSON;
 import edu.neu.ecommerce.vo.SkuClickVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.configuration.Configuration;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -61,6 +58,5 @@ public class SinkMysql extends RichSinkFunction<SkuClickVo> {
         ps.setLong(2, value.getUserId());
         ps.setString(3, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         ps.executeUpdate(); //结果集
-        log.info("insert item:[{}]", JSON.toJSONString(value));
     }
 }

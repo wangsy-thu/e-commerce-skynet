@@ -135,13 +135,15 @@ public class LoginController {
         R login = memberFeignService.login(vo);
         if(login.getCode() == 0){
             //登录成功
-            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
+            MemberResponseVo data = login.getData("data",
+                    new TypeReference<MemberResponseVo>() {
             });
             session.setAttribute(AuthServerConstant.LOGIN_USER, data);
             return "redirect:http://gulimall.com";
         }else {
             Map<String, String> errors = new HashMap<>();
-            errors.put("msg", login.getData("msg", new TypeReference<String>(){}));
+            errors.put("msg", login.getData("msg",
+                    new TypeReference<String>(){}));
             redirectAttributes.addFlashAttribute("errors", errors);
             return "redirect:http://auth.gulimall.com/login.html";
         }

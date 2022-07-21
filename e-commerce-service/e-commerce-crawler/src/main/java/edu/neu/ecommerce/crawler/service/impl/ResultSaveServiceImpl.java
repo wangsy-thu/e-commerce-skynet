@@ -1,6 +1,5 @@
 package edu.neu.ecommerce.crawler.service.impl;
 
-import cn.hutool.core.lang.UUID;
 import com.alibaba.fastjson.JSON;
 import edu.neu.ecommerce.crawler.document.SkuCrawDoc;
 import edu.neu.ecommerce.crawler.service.ResultSaveService;

@@ -25,7 +25,7 @@ public class ScheduleUtils {
     /**
      * 获取触发器key
      */
-    public static TriggerKey getTriggerKey(Long jobId) {
+    public static TriggerKey getTriggerKey(Long jobId)  {
         return TriggerKey.triggerKey(JOB_NAME + jobId);
     }
     

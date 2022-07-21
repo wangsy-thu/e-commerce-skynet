@@ -46,4 +46,9 @@ public class ProductSaveServiceImpl implements ProductSaveService {
         log.info("商品上架完成，{}，返回数据:{}",co, bulk);
         return b;
     }
+
+    @Override
+    public void productStatusDown(Long skuId) {
+
+    }
 }

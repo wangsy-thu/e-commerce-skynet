@@ -13,4 +13,10 @@ public interface ProductSaveService {
      * @param skuEsModels 保存的商品信息
      */
     boolean productStatusUp(List<SkuEsModel> skuEsModels) throws IOException;
+
+    /**
+     * <h2>商品下架函数</h2>
+     * @param skuId 商品下架ID
+     */
+    void productStatusDown(Long skuId);
 }

@@ -44,6 +44,13 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
+        - id: api_order_route
+          uri: lb://e-commerce-order
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
         - id: ware_route
           uri: lb://e-commerce-ware
           predicates:
@@ -87,6 +94,11 @@ spring:
           uri: lb://e-commerce-seckill
           predicates:
             - Host=seckill.gulimall.com
+
+        - id: recommend_route
+          uri: lb://e-commerce-recommend
+          predicates:
+            - Host=recommend.gulimall.com
 
         - id: admin_route
           uri: lb://e-commerce-backstage
