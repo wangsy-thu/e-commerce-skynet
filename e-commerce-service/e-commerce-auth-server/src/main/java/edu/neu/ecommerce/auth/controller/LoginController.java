@@ -48,21 +48,20 @@ public class LoginController {
 
     @GetMapping("/sms/sendcode")
     @ResponseBody
-    public R sendCode(@RequestParam("phone") String phone){
-        //1，接口防刷
+    public R sendCode(@RequestParam("phone") String phone) {
+        // 1. 接口防刷
         String redisCode = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
-        if(redisCode != null){
+        if (redisCode != null) {
             long l = Long.parseLong(redisCode.split("_")[1]);
             if (System.currentTimeMillis() - l < 60 * 1000) {
-                //60s内不能再发
-                return R.error(BizCodeEnume.SMS_CODE_EXCEPTION.getCode(),
-                        BizCodeEnume.SMS_CODE_EXCEPTION.getMsg());
+                // 60s内不能再发
+                return R.error(BizCodeEnume.SMS_CODE_EXCEPTION.getCode(), BizCodeEnume.SMS_CODE_EXCEPTION.getMsg());
             }
         }
 
-        //2，验证码再次校验：存储到redis中，存key-phone，值value-code
+        // 2. 验证码再次校验：存储到 Redis 中，存 key-phone，值 value-code
         String code = UUID.randomUUID().toString().substring(0, 5) + "_" + System.currentTimeMillis();
-        //Redis缓存验证码，防止同一个手机号在60s内再次发送
+        // Redis 缓存验证码，防止同一个手机号在60s内再次发送
         redisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone, code, 10, TimeUnit.MINUTES);
         thirdPartyFeignService.sendCode(phone, code.substring(0, 5));
         return R.ok();
@@ -72,80 +71,73 @@ public class LoginController {
     public String register(@Valid UserRegistVo vo,
                            BindingResult bindingResult,
                            Model model,
-                           //模拟重定向携带数据
-                           RedirectAttributes redirectAttributes){
-        if(bindingResult.hasErrors()){
-            Map<String, String> errors = bindingResult.getFieldErrors().stream().collect(Collectors.toMap(
-                    FieldError::getField,
-                    FieldError::getDefaultMessage
-            ));
-            //校验出错，返回到注册页
-            redirectAttributes.addFlashAttribute("errors", errors);
-            return "redirect:http://auth.gulimall.com/reg.html";
+                           RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            handleValidationError(bindingResult, redirectAttributes);
+            return "redirect:/reg.html";
         }
-        //真正的注册，调用远程服务
-        //1，校验验证码
+
+        if (validateAndRegister(vo, redirectAttributes)) {
+            return "redirect:/login.html";
+        } else {
+            return "redirect:/reg.html";
+        }
+    }
+
+    private void handleValidationError(BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        Map<String, String> errors = bindingResult.getFieldErrors().stream().collect(Collectors.toMap(
+                FieldError::getField,
+                FieldError::getDefaultMessage
+        ));
+        redirectAttributes.addFlashAttribute("errors", errors);
+    }
+
+    private boolean validateAndRegister(UserRegistVo vo, RedirectAttributes redirectAttributes) {
         String code = vo.getCode();
-        String s = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + vo.getPhone());
-        if(!StringUtils.isEmpty(s)){
+        String phone = vo.getPhone();
+        String redisCode = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
 
-            if(code.equals(s.split("_")[0])){
-                //删除验证码
-                redisTemplate.delete(AuthServerConstant.SMS_CODE_CACHE_PREFIX + vo.getPhone());
-                //真正进行注册
-                R r = memberFeignService.regist(vo);
-                if(r.getCode() == 0){
-                    //成功状态
-                    return "redirect:http://auth.gulimall.com/login.html";
-                } else {
-                    Map<String, String> errors = new HashMap<>();
-                    errors.put("message", r.getData("msg", new TypeReference<String>(){}));
-                    redirectAttributes.addFlashAttribute("errors", errors);
-                    return "redirect:http://auth.gulimall.com/reg.html";
-                }
-            }else {
-                Map<String, String> errors = new HashMap<>();
-                errors.put("code", "验证码错误");
-                redirectAttributes.addFlashAttribute("errors", errors);
-                return "redirect:http://auth.gulimall.com/reg.html";
-            }
-
-        }else{
-            Map<String, String> errors = new HashMap<>();
-            errors.put("code", "验证码错误");
-            redirectAttributes.addFlashAttribute("errors", errors);
-            return "redirect:http://auth.gulimall.com/reg.html";
+        if (StringUtils.isEmpty(redisCode) || !code.equals(redisCode.split("_")[0])) {
+            handleValidationError("code", "验证码错误", redirectAttributes);
+            return false;
         }
+
+        redisTemplate.delete(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
+        R r = memberFeignService.regist(vo);
+        if (r.getCode() == 0) {
+            return true;
+        } else {
+            handleValidationError("message", r.getData("msg", new TypeReference<String>(){}), redirectAttributes);
+            return false;
+        }
+    }
+
+    private void handleValidationError(String fieldName, String errorMessage, RedirectAttributes redirectAttributes) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put(fieldName, errorMessage);
+        redirectAttributes.addFlashAttribute("errors", errors);
     }
 
     @GetMapping("/login.html")
-    public String loginPage(HttpSession session){
+    public String loginPage(HttpSession session) {
         Object attribute = session.getAttribute(AuthServerConstant.LOGIN_USER);
-        if(attribute == null){
+        if (attribute == null) {
             return "login";
         }
-        return "redirect:http://gulimall.com";
+        return "redirect:/";
     }
 
     @PostMapping("/login")
-    public String login(UserLoginVo vo,
-                        RedirectAttributes redirectAttributes,
-                        HttpSession session){
+    public String login(UserLoginVo vo, RedirectAttributes redirectAttributes, HttpSession session) {
         log.info("get user:[{}]", JSON.toJSONString(vo));
         R login = memberFeignService.login(vo);
-        if(login.getCode() == 0){
-            //登录成功
-            MemberResponseVo data = login.getData("data",
-                    new TypeReference<MemberResponseVo>() {
-            });
+        if (login.getCode() == 0) {
+            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
             session.setAttribute(AuthServerConstant.LOGIN_USER, data);
-            return "redirect:http://gulimall.com";
-        }else {
-            Map<String, String> errors = new HashMap<>();
-            errors.put("msg", login.getData("msg",
-                    new TypeReference<String>(){}));
-            redirectAttributes.addFlashAttribute("errors", errors);
-            return "redirect:http://auth.gulimall.com/login.html";
+            return "redirect:/";
+        } else {
+            handleValidationError("msg", login.getData("msg", new TypeReference<String>(){}), redirectAttributes);
+            return "redirect:/login.html";
         }
     }
 }
